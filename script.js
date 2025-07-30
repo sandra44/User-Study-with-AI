@@ -1,13 +1,13 @@
 // 🔐 AZURE CONFIGURATION - Your credentials are embedded here
 const AZURE_CONFIG = {
     openai: {
-        endpoint: "https://sandr-m8rotipa-eastus2.cognitiveservices.azure.com",
-        apiKey: "1wRkUmrtNcacZiSpb9I9sR0kZ8diEc4j0SePv6bwLHWmf31jtpHaJQQJ99BCACHYHv6XJ3w3AAAAACOGvhYZ",
-        deployment: "gpt-4o"
+        endpoint: [ADD_YOUR_ENDPOINT],
+        apiKey: [ADD_YOUR_KEY],
+        deployment: [ADD_DEPLOYMENT_NAME]
     },
     speech: {
-        key: "8rxjKMJEA3KjpJVF9XVZZ9TkCojwgU45uxLQ66KfSArGGj7IhL6JQQJ99BEACYeBJjFXJ3w3AAAYACOGhq3W",
-        region: "eastus"
+        key: [ADD_YOUR_KEY],
+        region: [ADD_REGION]
     }
 };
 
