@@ -697,8 +697,8 @@ body {
 /* Interview Layout */
 .interview-layout {
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 30px;
+    grid-template-columns: 5fr 1fr;
+    gap: 20px;
 }
 
 .interview-header {
@@ -767,9 +767,9 @@ body {
 /* Interview Layout */
 .interview-layout {
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 30px;
-    max-height: 600px;
+    grid-template-columns: 5fr 1fr;
+    gap: 20px;
+    max-height: calc(100vh - 280px);
 }
 
 .interview-main {
@@ -781,7 +781,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    max-height: 600px;
+    max-height: calc(100vh - 280px);
     overflow-y: auto;
 }
 
@@ -824,7 +824,7 @@ body {
     background: white;
     border-radius: 12px;
     border: 1px solid #e0e0e0;
-    height: 500px;
+    height: calc(100vh - 320px);
     display: flex;
     flex-direction: column;
 }
