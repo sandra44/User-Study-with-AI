@@ -36,6 +36,7 @@ class UserPersonaApp {
         this.speechRecognition = null;
         this.currentSpeech = null; // For speech synthesis
         this.voiceSystemReady = false; // Flag to track voice system readiness
+        this.isVoiceEnabled = true; // Flag to control voice on/off
         this.currentStep = 1;
         this.totalSteps = 5;
         this.selectedImage = null;
@@ -1059,6 +1060,14 @@ class UserPersonaApp {
         document.getElementById('chatPersonaOccupation').value = this.persona.occupation || '';
         document.getElementById('chatTechLevel').value = this.persona.techLevel;
         document.getElementById('chatTechValue').textContent = this.persona.techLevel;
+        
+        // Initialize voice toggle button appearance
+        const voiceToggle = document.getElementById('voiceToggle');
+        if (voiceToggle) {
+            voiceToggle.innerHTML = this.isVoiceEnabled ? '🔊' : '🔇';
+            voiceToggle.title = this.isVoiceEnabled ? 'Voice enabled - Click to mute' : 'Voice disabled - Click to enable';
+            voiceToggle.style.opacity = this.isVoiceEnabled ? '1' : '0.5';
+        }
     }
 
     setupInterviewEventListeners() {
@@ -1084,8 +1093,7 @@ class UserPersonaApp {
         const voiceToggle = document.getElementById('voiceToggle');
         if (voiceToggle) {
             voiceToggle.addEventListener('click', () => {
-                // Toggle voice functionality
-                console.log('Voice toggle clicked');
+                this.toggleVoice();
             });
         }
     }
@@ -1515,6 +1523,12 @@ Current conversation context: This is an interview/chat session where someone wa
 
     // Speech synthesis
     speakText(text) {
+        // Check if voice is enabled
+        if (!this.isVoiceEnabled) {
+            console.log('Voice is disabled, skipping speech synthesis');
+            return;
+        }
+
         // Check if voice system is ready
         if (!this.voiceSystemReady) {
             console.warn('Voice system not ready, skipping speech synthesis');
@@ -1661,6 +1675,28 @@ Current conversation context: This is an interview/chat session where someone wa
             button.innerHTML = this.isRecording ? '🔴' : '🎤';
             button.title = this.isRecording ? 'Stop recording' : 'Start voice recording';
         }
+    }
+
+    toggleVoice() {
+        this.isVoiceEnabled = !this.isVoiceEnabled;
+        
+        // Update the voice toggle button appearance
+        const voiceToggle = document.getElementById('voiceToggle');
+        if (voiceToggle) {
+            voiceToggle.innerHTML = this.isVoiceEnabled ? '🔊' : '🔇';
+            voiceToggle.title = this.isVoiceEnabled ? 'Voice enabled - Click to mute' : 'Voice disabled - Click to enable';
+            
+            // Add visual feedback
+            voiceToggle.style.opacity = this.isVoiceEnabled ? '1' : '0.5';
+        }
+        
+        // Stop current speech if disabling voice
+        if (!this.isVoiceEnabled && this.currentSpeech) {
+            speechSynthesis.cancel();
+            this.currentSpeech = null;
+        }
+        
+        console.log('Voice toggled:', this.isVoiceEnabled ? 'enabled' : 'disabled');
     }
 }
 
